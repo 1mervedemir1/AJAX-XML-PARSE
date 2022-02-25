@@ -1,0 +1,45 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div id="data">
+    <ul>
+
+    </ul>
+</div>
+
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+
+<script>
+
+    $(document).ready(function() {
+        $("#data").append("<p><b> İSİM </b><b> SOYİSİM </b></p>")
+        $.ajax({
+
+            type:"Get",
+
+            url: "/Content/bilgiler.xml",
+
+            datatype:"xml",
+
+            success: function(xml){
+                    $(xml).find('Personel').each (function() {
+
+                        $("#data").append("<p><li>"+   
+
+                                    $(this).find('ad').text()+ "</li><li>" +  $(this).find('soyad').text()+ "</li></p><br>");
+
+                    })
+            
+            },
+
+            error: function (xml) {
+
+                alert ("bir hata oluştu!");
+
+            }
+
+        })
+    })
+</script>
